@@ -20,7 +20,8 @@ func RootCommand() *cobra.Command {
 		Short: "Start the worker multiplexer",
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			if version {
-				return VersionCommand().Execute()
+				printVersion()
+				return nil
 			}
 			q, err := queue.NewRedisQueue(redisHost, redisPassword, redisDb, redisList)
 			if err != nil {
