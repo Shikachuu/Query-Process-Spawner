@@ -1,4 +1,4 @@
-package root
+package cmd
 
 import (
 	"fmt"
@@ -11,9 +11,8 @@ func VersionCommand() *cobra.Command {
 		Use:   "version",
 		Short: "Show the version information",
 		Args:  cobra.MaximumNArgs(0),
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			fmt.Printf("Version: %s\n", internal.Version)
-			return nil
+		Run: func(cmd *cobra.Command, _ []string) {
+			fmt.Printf("Version: %s\tCommit: %s\n", internal.Version, internal.GitCommit)
 		},
 	}
 }

@@ -1,5 +1,6 @@
 package internal
 
 var (
-	Version = "Dev"
+	Version   = "Dev"
+	GitCommit = ""
 )
