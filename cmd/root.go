@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"github.com/Shikachuu/php-process-redis-list/pkg/queue"
 	"github.com/spf13/cobra"
 )
 
@@ -22,8 +22,15 @@ func RootCommand() *cobra.Command {
 			if version {
 				return VersionCommand().Execute()
 			}
-
-			fmt.Println("App goes brrr")
+			q, err := queue.NewRedisQueue(redisHost, redisPassword, redisDb, redisList)
+			if err != nil {
+				return err
+			}
+			qmc := make(chan string)
+			go func() {
+				_ = q.Listen(qmc)
+			}()
+			<-qmc
 			return nil
 		},
 	}
