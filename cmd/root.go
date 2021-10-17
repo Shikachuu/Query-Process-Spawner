@@ -11,6 +11,7 @@ func RootCommand() *cobra.Command {
 		redisHost       string
 		redisPassword   string
 		redisDb         int
+		redisList       string
 		numberOfWorkers int
 	)
 
@@ -30,7 +31,8 @@ func RootCommand() *cobra.Command {
 	cmd.Flags().StringVar(&redisHost, "redis.host", "127.0.0.1:6379", "Set the address for the redis host")
 	cmd.Flags().StringVar(&redisPassword, "redis.password", "", "Set the password for the redis host")
 	cmd.Flags().IntVar(&redisDb, "redis.db", 0, "Set the DB for the redis host")
-	cmd.Flags().IntVar(&numberOfWorkers, "workers.max", 0, "Set the DB for the redis host")
+	cmd.Flags().StringVar(&redisList, "redis.list", "", "Set the list that the app listens on")
+	cmd.Flags().IntVar(&numberOfWorkers, "workers.max", 1, "Set the DB for the redis host")
 
 	cmd.Flags().BoolVarP(&version, "version", "v", false, "Show the version information")
 	// Commands
