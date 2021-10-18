@@ -16,8 +16,8 @@ func RootCommand() *cobra.Command {
 	)
 
 	cmd := &cobra.Command{
-		Use:   "runner",
-		Short: "Start the worker multiplexer",
+		Use:   "qpp",
+		Short: "Start the QPP to spawn processes based on queue messages",
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			if version {
 				printVersion()

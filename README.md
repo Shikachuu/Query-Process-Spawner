@@ -1,5 +1,5 @@
-# Yet Another PHP process manager, but this time for redis lists
-
+# Queue Process Portal
+**tldr:** This is yet another process manager, but this time this is using queue messages to spawn processes.
 ## Required params:
 - Redis address (default `127.0.0.1:6379`)
 - Redis password (default `""`)
@@ -13,6 +13,7 @@
 - `--redis.db`
 - `--redis.list`
 - `--workers.max`
+- `--workers.command`
 - `--version`
 
 ## Env vars
@@ -21,3 +22,4 @@
 - `REDIS_DB`
 - `REDIS_LIST`
 - `WORKERS_MAX`
+- `WORKERS_COMMAND`
