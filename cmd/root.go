@@ -3,16 +3,20 @@ package cmd
 import (
 	"github.com/Shikachuu/php-process-redis-list/pkg/queue"
 	"github.com/spf13/cobra"
+	"os"
+	"os/exec"
+	"strings"
 )
 
 func RootCommand() *cobra.Command {
 	var (
-		version         bool
-		redisHost       string
-		redisPassword   string
-		redisDb         int
-		redisList       string
-		numberOfWorkers int
+		version           bool
+		redisHost         string
+		redisPassword     string
+		redisDb           int
+		redisList         string
+		numberOfWorkers   int
+		commandForWorkers string
 	)
 
 	cmd := &cobra.Command{
@@ -31,7 +35,18 @@ func RootCommand() *cobra.Command {
 			go func() {
 				_ = q.Listen(qmc)
 			}()
-			<-qmc
+			select {
+			case msg := <-qmc:
+				cmd := exec.Command(commandForWorkers)
+				cmd.Stdin = strings.NewReader(msg)
+				cmd.Stdout = os.Stdout
+				cmd.Stderr = os.Stderr
+				cmd.Env = os.Environ()
+				go func() {
+					_ = cmd.Start()
+					_ = cmd.Wait()
+				}()
+			}
 			return nil
 		},
 	}
@@ -40,7 +55,8 @@ func RootCommand() *cobra.Command {
 	cmd.Flags().StringVar(&redisPassword, "redis.password", "", "Set the password for the redis host")
 	cmd.Flags().IntVar(&redisDb, "redis.db", 0, "Set the DB for the redis host")
 	cmd.Flags().StringVar(&redisList, "redis.list", "", "Set the list that the app listens on")
-	cmd.Flags().IntVar(&numberOfWorkers, "workers.max", 1, "Set the DB for the redis host")
+	cmd.Flags().IntVar(&numberOfWorkers, "workers.max", 1, "Set the max number of running processes")
+	cmd.Flags().StringVar(&commandForWorkers, "workers.command", "", "Set the command that the workers will execute")
 
 	cmd.Flags().BoolVarP(&version, "version", "v", false, "Show the version information")
 	// Commands

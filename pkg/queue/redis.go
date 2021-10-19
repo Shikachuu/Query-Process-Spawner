@@ -8,10 +8,10 @@ import (
 type Queue struct {
 	client *redis.Client
 	ctx    context.Context
-	list   string
+	queue  string
 }
 
-func NewRedisQueue(host string, password string, db int, list string) (*Queue, error) {
+func NewRedisQueue(host string, password string, db int, queue string) (*Queue, error) {
 	q := &Queue{
 		ctx: context.Background(),
 		client: redis.NewClient(&redis.Options{
@@ -19,13 +19,13 @@ func NewRedisQueue(host string, password string, db int, list string) (*Queue, e
 			Password: password, // no password set
 			DB:       db,       // use default DB
 		}),
-		list: list,
+		queue: queue,
 	}
 	return q, q.client.Ping(q.ctx).Err()
 }
 
 func (q *Queue) Receive() (string, error) {
-	return q.client.RPop(q.ctx, q.list).Result()
+	return q.client.RPop(q.ctx, q.queue).Result()
 }
 
 func (q *Queue) Listen(i chan string) error {
