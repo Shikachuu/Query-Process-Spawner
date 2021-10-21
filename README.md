@@ -1,7 +1,8 @@
 # Queue Process Portal
-## Cards:
 [![Go Report Card](https://goreportcard.com/badge/github.com/Shikachuu/php-process-redis-list)](https://goreportcard.com/report/github.com/Shikachuu/php-process-redis-list)
+
 **tldr:** This is yet another process manager, but this time this is using queue messages to spawn processes.
+
 ## Required params:
 - Redis address (default `127.0.0.1:6379`)
 - Redis password (default `""`)
