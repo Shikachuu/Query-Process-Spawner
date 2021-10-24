@@ -28,7 +28,7 @@ func RunProcesses(qmc chan string, cmd []string, mw int) {
 				}
 				err = subCmd.Wait()
 				if err != nil {
-					log.Fatalf("an error occured while running command: %s", err)
+					log.Fatalf("an error occurred while running command: %s", err)
 				}
 			}()
 		} else {
