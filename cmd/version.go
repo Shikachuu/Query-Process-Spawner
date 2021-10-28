@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/Shikachuu/php-process-redis-list/internal"
+	"github.com/Shikachuu/Query-Process-Spawner/internal"
 	"github.com/spf13/cobra"
 )
 

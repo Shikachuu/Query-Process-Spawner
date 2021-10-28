@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Shikachuu/php-process-redis-list/cmd"
+	"github.com/Shikachuu/Query-Process-Spawner/cmd"
 	"log"
 )
 

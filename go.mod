@@ -1,4 +1,4 @@
-module github.com/Shikachuu/php-process-redis-list
+module github.com/Shikachuu/Query-Process-Spawner
 
 go 1.16
 

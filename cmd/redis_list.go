@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/Shikachuu/php-process-redis-list/pkg/process"
-	"github.com/Shikachuu/php-process-redis-list/pkg/queue"
+	"github.com/Shikachuu/Query-Process-Spawner/pkg/process"
+	"github.com/Shikachuu/Query-Process-Spawner/pkg/queue"
 	"github.com/spf13/cobra"
 )
 
